@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma Agence{% endblock %}
+
+{% block body %}
+<div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+        <h1 class="display-4">Ma Agence</h1>
+        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row flex">
+    {% for prop in props %}
+        <div class="col-3">
+            <div class="card">
+            {% if prop.imageName %}
+            <img src="{{ vich_uploader_asset(prop, 'imageFile') }}" alt="" style="width:100%;height:auto">
+            {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ prop.title }}</h5>
+                    <p class="card-text">{{ prop.description }}</p>
+                    <p class="card-text">{{ prop.getFomratPrice }}</p>
+                    <a href="{{ path('property_show', {id: prop.id, slug: prop.getSlug}) }}" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>        
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

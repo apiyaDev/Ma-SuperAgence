@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous nos bien{% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    {{ form_start(form) }}
+                    {{ form_row(form.maxprice) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.minsurface) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.option) }}
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" >Recherche</button>
+                    {{ form_end(form) }}
+                </div>        
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3 class="display-4">Voir Tous Nos Biens</h3>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% for prop in props %}
+                <div class="col-md-4">
+                    <div class="card">
+                    {% if prop.imageName %}
+                        <img src="{{ vich_uploader_asset(prop, 'imageFile') }}" alt="" style="width:100%;height:auto">
+                    {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ prop.title }}</h5>
+                            <p class="card-text">{{ prop.description }}</p>
+                            <p class="card-text">{{ prop.getFomratPrice }}</p>
+                            <p>Like</p>
+                            <a href="{{ path('property_show', {id: prop.id, slug: prop.getSlug}) }}" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="navigation" style="margin-top: 29px;">
+            {{ knp_pagination_render(props) }}
+        </div>
+
+    </div>
+{% endblock %}

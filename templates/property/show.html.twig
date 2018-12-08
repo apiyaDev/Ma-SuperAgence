@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ prop.title }}{% endblock %}
+
+{% block body %}
+
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+            {% if prop.imageName %}
+                <img src="{{ vich_uploader_asset(prop, 'imageFile') }}" alt="" style="width:100%;height:auto">
+            {% endif %}
+            </div>
+            <div class="col-md-4">
+                <h1>{{ prop.title }}</h1>
+                <h2>{{ prop.rooms }}
+                    piecies -
+                    {{ prop.surface }}
+                    m²</h2>
+                <div class="text-primary" style="fonts-size:4em;font-weight:bold">
+                    {{ prop.getFomratPrice }}
+                    £
+                </div>
+                <a href="" class="btn btn-primary">Contacter L'agence</a>
+                <div id="contactForm" class="mt-4" >
+                    {{ form_start(contactForm) }}
+                        <div class="col">
+                            {{ form_row(contactForm.firstName) }}
+                            {{ form_row(contactForm.lastName) }}
+                        </div>
+                        <div class="col">
+                            {{ form_row(contactForm.phone) }}
+                            {{ form_row(contactForm.email) }}
+                        </div>
+                        <div class="col">
+                            {{ form_row(contactForm.message) }}
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-primary" >Envoyer</button>
+                        </div>
+                    {{ form_end(contactForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+
+    <p>
+        {{ prop.description | nl2br }}
+    </p>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Caractirestique</h2>
+            <table class="table table-striped" >
+                <tr>
+                    <td>Surface habitable</td>
+                    <td>{{prop.surface}} m²</td>
+                </tr>
+                <tr>
+                    <td>Pieces</td>
+                    <td>{{prop.rooms}}</td>
+                </tr>
+                <tr>
+                    <td>Chambers</td>
+                    <td>{{prop.bedrooms}}</td>
+                </tr>
+                <tr>
+                    <td>Etage</td>
+                    <td>{{prop.floor}}</td>
+                </tr>
+                <tr>
+                    <td>Chauffage</td>
+                    <td>{{prop.getHeatType}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <h2>Specifique</h2>
+            <ul class="list-group">
+                {% for option in prop.options %}
+                    <li class="list-group-item" >{{ option.name }}</li>    
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

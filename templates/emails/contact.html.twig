@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-4">
+
+    <table class="table table-striped">
+        <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">{{ contact.firstName }}</th>
+        </tr>
+        <tr>
+            <th scope="col">Prenom</th>
+            <th scope="col">{{ contact.lastName }}</th>
+        </tr>
+        <tr>
+            <th scope="col">Phone</th>
+            <th scope="col">{{ contact.phone }}</th>
+        </tr>
+        <tr>
+            <th scope="col">Email</th>
+            <th scope="col">{{ contact.email }}</th>
+        </tr>
+        <tr>
+            <th scope="col">Message</th>
+            <th scope="col">{{ contact.message }}</th>
+        </tr>
+    </table>
+
+    </div>
+
+{% endblock %}
